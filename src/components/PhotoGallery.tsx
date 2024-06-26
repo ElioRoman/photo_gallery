@@ -15,7 +15,7 @@ const PhotoGallery: React.FC = () => {
 
   const loadPhotos = async () => {
     const response = await fetchPhotos(query, page);
-    setPhotos(response.data.results);
+    setPhotos(response?.data?.results || response?.data);
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
