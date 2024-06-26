@@ -3,7 +3,6 @@ import { fetchPhotos } from "../api/unsplash.ts";
 import { Container, Grid, TextField, Button, Typography } from "@mui/material";
 import PhotoCard from "./PhotoCard.tsx";
 import { IPhoto } from "../types/index.ts";
-import { delay } from "q";
 
 const PhotoGallery: React.FC = () => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
@@ -42,24 +41,26 @@ const PhotoGallery: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={page === 1}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setPage((prev) => prev + 1)}
-          style={{ marginLeft: "10px" }}
-        >
-          Next
-        </Button>
-      </div>
+      {query && (
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setPage((prev) => prev + 1)}
+            style={{ marginLeft: "10px" }}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </Container>
   );
 };
